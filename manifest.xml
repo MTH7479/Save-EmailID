@@ -10,9 +10,9 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Copy Email ID" />
   <Description DefaultValue="Copies the selected message EmailId to the clipboard." />
-  <IconUrl DefaultValue="https://YOUR-HOST/assets/icon-64.png" />
-  <HighResolutionIconUrl DefaultValue="https://YOUR-HOST/assets/icon-128.png" />
-  <SupportUrl DefaultValue="https://YOUR-HOST/" />
+  <IconUrl DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-128.png" />
+  <SupportUrl DefaultValue="https://mth7479.github.io/Save-EmailID" />
   <AppDomains>
     <AppDomain>https://YOUR-HOST</AppDomain>
   </AppDomains>
@@ -27,7 +27,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://YOUR-HOST/taskpane.html" />
+        <SourceLocation DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -75,13 +75,13 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://YOUR-HOST/assets/icon-16.png" />
-        <bt:Image id="icon32" DefaultValue="https://YOUR-HOST/assets/icon-32.png" />
-        <bt:Image id="icon80" DefaultValue="https://YOUR-HOST/assets/icon-80.png" />
+        <bt:Image id="icon16" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-16.png" />
+        <bt:Image id="icon32" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-32.png" />
+        <bt:Image id="icon80" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://YOUR-HOST/taskpane.html" />
-        <bt:Url id="functionFile" DefaultValue="https://YOUR-HOST/taskpane.html" />
+        <bt:Url id="taskpaneUrl" DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
+        <bt:Url id="functionFile" DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="grpLabel" DefaultValue="Email ID" />
