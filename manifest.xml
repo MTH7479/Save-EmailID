@@ -4,92 +4,129 @@
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
+
   <Id>a5518989-8fce-4416-a833-e876ab82941b</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Shubich Engineering</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Copy Email ID" />
-  <Description DefaultValue="Copies the selected message EmailId to the clipboard." />
-  <IconUrl DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-64.png" />
-  <HighResolutionIconUrl DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-128.png" />
-  <SupportUrl DefaultValue="https://mth7479.github.io/Save-EmailID" />
+
+  <DisplayName DefaultValue="Copy Email ID"/>
+  <Description DefaultValue="Copies the selected message EmailId to the clipboard."/>
+
+  <IconUrl DefaultValue="https://mth7479.github.io/Save-EmailID/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://mth7479.github.io/Save-EmailID/assets/icon-128.png"/>
+
+  <SupportUrl DefaultValue="https://mth7479.github.io/Save-EmailID"/>
+
   <AppDomains>
-    <AppDomain>https://YOUR-HOST</AppDomain>
+    <AppDomain>https://mth7479.github.io</AppDomain>
   </AppDomains>
+
   <Hosts>
-    <Host Name="Mailbox" />
+    <Host Name="Mailbox"/>
   </Hosts>
+
   <Requirements>
     <Sets>
-      <Set Name="Mailbox" MinVersion="1.3" />
+      <Set Name="Mailbox" MinVersion="1.3"/>
     </Sets>
   </Requirements>
+
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
+        <SourceLocation DefaultValue="https://mth7479.github.io/Save-EmailID/taskpane.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
   </FormSettings>
+
   <Permissions>ReadItem</Permissions>
+
   <Rule xsi:type="RuleCollection" Mode="Or">
-    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
   </Rule>
+
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
+                    xsi:type="VersionOverridesV1_0">
+
     <Requirements>
       <bt:Sets DefaultMinVersion="1.3">
-        <bt:Set Name="Mailbox" />
+        <bt:Set Name="Mailbox"/>
       </bt:Sets>
     </Requirements>
+
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <FunctionFile resid="functionFile" />
+
+          <FunctionFile resid="functionFile"/>
+
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
+
               <Group id="grpCopyId">
-                <Label resid="grpLabel" />
+                <Label resid="grpLabel"/>
+
                 <Control xsi:type="Button" id="btnCopyId">
-                  <Label resid="btnLabel" />
+
+                  <Label resid="btnLabel"/>
+
                   <Supertip>
-                    <Title resid="btnLabel" />
-                    <Description resid="btnTip" />
+                    <Title resid="btnLabel"/>
+                    <Description resid="btnTip"/>
                   </Supertip>
+
                   <Icon>
-                    <bt:Image size="16" resid="icon16" />
-                    <bt:Image size="32" resid="icon32" />
-                    <bt:Image size="80" resid="icon80" />
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
                   </Icon>
+
                   <Action xsi:type="ShowTaskpane">
-                    <SourceLocation resid="taskpaneUrl" />
+                    <SourceLocation resid="taskpaneUrl"/>
                   </Action>
+
                 </Control>
               </Group>
+
             </OfficeTab>
           </ExtensionPoint>
+
         </DesktopFormFactor>
       </Host>
     </Hosts>
+
     <Resources>
+
       <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-16.png" />
-        <bt:Image id="icon32" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-32.png" />
-        <bt:Image id="icon80" DefaultValue="https://mth7479.github.io/Save-EmailIDassets/icon-80.png" />
+        <bt:Image id="icon16" DefaultValue="https://mth7479.github.io/Save-EmailID/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://mth7479.github.io/Save-EmailID/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://mth7479.github.io/Save-EmailID/assets/icon-80.png"/>
       </bt:Images>
+
       <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
-        <bt:Url id="functionFile" DefaultValue="https://mth7479.github.io/Save-EmailIDtaskpane.html" />
+        <bt:Url id="taskpaneUrl"
+                DefaultValue="https://mth7479.github.io/Save-EmailID/taskpane.html"/>
+
+        <bt:Url id="functionFile"
+                DefaultValue="https://mth7479.github.io/Save-EmailID/taskpane.html"/>
       </bt:Urls>
+
       <bt:ShortStrings>
-        <bt:String id="grpLabel" DefaultValue="Email ID" />
-        <bt:String id="btnLabel" DefaultValue="Copy Email ID" />
+        <bt:String id="grpLabel" DefaultValue="Email ID"/>
+        <bt:String id="btnLabel" DefaultValue="Copy Email ID"/>
       </bt:ShortStrings>
+
       <bt:LongStrings>
-        <bt:String id="btnTip" DefaultValue="Copy the EmailId of the selected message to the clipboard." />
+        <bt:String id="btnTip"
+                   DefaultValue="Copy the EmailId of the selected message to the clipboard."/>
       </bt:LongStrings>
+
     </Resources>
+
   </VersionOverrides>
+
 </OfficeApp>
