@@ -1,41 +1,33 @@
-/* Copy Email ID - Outlook add-in task pane logic */
 (function () {
   "use strict";
 
-  var ids = { rest: "", ews: "", net: "" };
+  var emailId = "";
 
   Office.onReady(function (info) {
+
     if (info.host !== Office.HostType.Outlook) {
-      setStatus("האדין נטען מחוץ ל-Outlook", true);
+      setStatus("האדין נטען מחוץ ל‑Outlook", true);
       return;
     }
 
-    loadIds();
+    loadEmailId();
 
     document.getElementById("btnRest").onclick = function () {
-      copy(ids.rest, "Graph / REST Id");
+      copy(emailId, "EmailId");
     };
 
-    document.getElementById("btnEws").onclick = function () {
-      copy(ids.ews, "EWS ItemId");
-    };
-
-    document.getElementById("btnInternet").onclick = function () {
-      copy(ids.net, "Internet Message-Id");
-    };
-
-    // Refresh when the user selects another message
     try {
       Office.context.mailbox.addHandlerAsync(
         Office.EventType.ItemChanged,
-        loadIds
+        loadEmailId
       );
     } catch (e) {
-      // not supported in all hosts
+      // Not supported in all Outlook hosts
     }
   });
 
-  function loadIds() {
+  function loadEmailId() {
+
     var item = Office.context.mailbox.item;
 
     if (!item) {
@@ -43,69 +35,84 @@
       return;
     }
 
-    ids.ews = item.itemId || "";
-    ids.net = item.internetMessageId || "";
-    ids.rest = "";
+    var ewsId = item.itemId || "";
+    emailId = "";
 
-    if (ids.ews) {
+    if (ewsId) {
+
       try {
-        ids.rest = Office.context.mailbox.convertToRestId(
-          ids.ews,
+
+        emailId = Office.context.mailbox.convertToRestId(
+          ewsId,
           Office.MailboxEnums.RestVersion.v2_0
         );
+
       } catch (e) {
-        ids.rest = ids.ews;
+
+        emailId = ewsId;
+
       }
+
+      render();
+
     } else if (item.saveAsync) {
-      // Compose mode: the message must be saved before it has an id
-      item.saveAsync(function (r) {
-        if (r.status === Office.AsyncResultStatus.Succeeded) {
-          ids.ews = r.value;
+
+      item.saveAsync(function (result) {
+
+        if (result.status === Office.AsyncResultStatus.Succeeded) {
 
           try {
-            ids.rest = Office.context.mailbox.convertToRestId(
-              r.value,
+
+            emailId = Office.context.mailbox.convertToRestId(
+              result.value,
               Office.MailboxEnums.RestVersion.v2_0
             );
+
           } catch (e) {
-            ids.rest = r.value;
+
+            emailId = result.value;
+
           }
 
           render();
         }
       });
     }
-
-    render();
   }
 
   function render() {
-    document.getElementById("restId").value = ids.rest;
-    document.getElementById("ewsId").value = ids.ews;
-    document.getElementById("netId").value = ids.net;
+
+    document.getElementById("restId").value = emailId;
+
   }
 
-  function copy(text, what) {
+  function copy(text, description) {
+
     if (!text) {
-      setStatus("אין ערך להעתקה (" + what + ")", true);
+      setStatus("אין ערך להעתקה", true);
       return;
     }
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
+
       navigator.clipboard.writeText(text).then(
         function () {
-          setStatus("הועתק: " + what);
+          setStatus("הועתק: " + description);
         },
         function () {
-          fallbackCopy(text, what);
+          fallbackCopy(text, description);
         }
       );
+
     } else {
-      fallbackCopy(text, what);
+
+      fallbackCopy(text, description);
+
     }
   }
 
-  function fallbackCopy(text, what) {
+  function fallbackCopy(text, description) {
+
     var ta = document.createElement("textarea");
 
     ta.value = text;
@@ -117,27 +124,30 @@
     ta.focus();
     ta.select();
 
-    var ok = false;
+    var success = false;
 
     try {
-      ok = document.execCommand("copy");
+      success = document.execCommand("copy");
     } catch (e) {
-      ok = false;
+      success = false;
     }
 
     document.body.removeChild(ta);
 
     setStatus(
-      ok
-        ? "הועתק: " + what
-        : "ההעתקה נחסמה - סמן ידנית והקש Ctrl+C",
-      !ok
+      success
+        ? "הועתק: " + description
+        : "ההעתקה נחסמה - סמן את הטקסט והקש Ctrl+C",
+      !success
     );
   }
 
-  function setStatus(msg, isError) {
-    var el = document.getElementById("status");
-    el.textContent = msg;
-    el.className = isError ? "err" : "";
+  function setStatus(message, isError) {
+
+    var status = document.getElementById("status");
+
+    status.textContent = message;
+    status.className = isError ? "err" : "";
   }
+
 })();
