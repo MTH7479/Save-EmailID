@@ -24,6 +24,7 @@
       copy(ids.net, "Internet Message-Id");
     };
 
+    // Refresh when the user selects another message
     try {
       Office.context.mailbox.addHandlerAsync(
         Office.EventType.ItemChanged,
@@ -56,6 +57,7 @@
         ids.rest = ids.ews;
       }
     } else if (item.saveAsync) {
+      // Compose mode: the message must be saved before it has an id
       item.saveAsync(function (r) {
         if (r.status === Office.AsyncResultStatus.Succeeded) {
           ids.ews = r.value;
@@ -80,4 +82,62 @@
   function render() {
     document.getElementById("restId").value = ids.rest;
     document.getElementById("ewsId").value = ids.ews;
-    document.
+    document.getElementById("netId").value = ids.net;
+  }
+
+  function copy(text, what) {
+    if (!text) {
+      setStatus("אין ערך להעתקה (" + what + ")", true);
+      return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () {
+          setStatus("הועתק: " + what);
+        },
+        function () {
+          fallbackCopy(text, what);
+        }
+      );
+    } else {
+      fallbackCopy(text, what);
+    }
+  }
+
+  function fallbackCopy(text, what) {
+    var ta = document.createElement("textarea");
+
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+
+    document.body.appendChild(ta);
+
+    ta.focus();
+    ta.select();
+
+    var ok = false;
+
+    try {
+      ok = document.execCommand("copy");
+    } catch (e) {
+      ok = false;
+    }
+
+    document.body.removeChild(ta);
+
+    setStatus(
+      ok
+        ? "הועתק: " + what
+        : "ההעתקה נחסמה - סמן ידנית והקש Ctrl+C",
+      !ok
+    );
+  }
+
+  function setStatus(msg, isError) {
+    var el = document.getElementById("status");
+    el.textContent = msg;
+    el.className = isError ? "err" : "";
+  }
+})();
