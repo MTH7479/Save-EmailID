@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copy Email ID – Outlook Add-in</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 40px auto; max-width: 640px;
+           line-height: 1.6; color: #201f1e; }
+    h1 { color: #0078d4; }
+    code { background: #f3f2f1; padding: 2px 5px; border-radius: 3px; direction: ltr;
+           display: inline-block; }
+    ul { padding-inline-start: 20px; }
+    .ok { color: #107c10; font-weight: 600; }
+    img { width: 64px; height: 64px; }
+  </style>
+</head>
+<body>
+  <img src="assets/icon-64.png" alt="Copy Email ID" />
+  <h1>Copy Email ID</h1>
+  <p class="ok">האחסון פעיל – הדף הזה נטען בהצלחה מכתובת ה-HTTPS שלך.</p>
+
+  <p>תוסף ל-Outlook שמעתיק את מזהה המייל הנבחר ללוח, להדבקה ב-Power Automate,
+     Dataverse, Excel או כל מקום אחר.</p>
+
+  <h3>קבצי התוסף באתר הזה</h3>
+  <ul>
+    <li><a href="taskpane.html">taskpane.html</a> – חלון הצד (נפתח בלחיצה על הכפתור ב-Outlook)</li>
+    <li><code>taskpane.js</code> – לוגיקת קריאת המזהה וההעתקה</li>
+    <li><code>manifest.xml</code> – קובץ ההגדרה שמתקינים ב-Outlook</li>
+    <li><code>assets/icon-16..128.png</code> – אייקוני הכפתור</li>
+  </ul>
+
+  <h3>בדיקת תקינות אחסון</h3>
+  <ul>
+    <li>האייקון למעלה מוצג → תיקיית <code>assets</code> נגישה.</li>
+    <li>הקישור ל-taskpane.html נפתח ללא שגיאה → הנתיב ב-manifest נכון.</li>
+    <li>ודא שכל המופעים של <code>YOUR-HOST</code> ב-<code>manifest.xml</code> הוחלפו בכתובת הזו.</li>
+  </ul>
+
+  <h3>התקנה</h3>
+  <p>Outlook ← Get Add-ins ← My add-ins ← Add a custom add-in ← Add from file ←
+     בחר את <code>manifest.xml</code>.</p>
+</body>
+</html>
