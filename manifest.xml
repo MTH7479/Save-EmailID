@@ -6,7 +6,7 @@
            xsi:type="MailApp">
 
   <Id>a5518989-8fce-4416-a833-e876ab82941b</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0.1</Version>
   <ProviderName>Shubich Engineering</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
 
